@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: payment-platform
+  labels:
+    app.kubernetes.io/part-of: distributed-payment-platform
+    app.kubernetes.io/name: payment-platform

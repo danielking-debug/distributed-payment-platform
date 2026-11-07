@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-platform-config
+  namespace: payment-platform
+  labels:
+    app.kubernetes.io/part-of: distributed-payment-platform
+    app.kubernetes.io/name: payment-platform-config
+data:
+  SERVER_PORT: "8080"
+  DB_URL: "jdbc:postgresql://postgres:5432/payment_ledger"
+  DB_POOL_SIZE: "5"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  # Kafka Service will be created in a later phase; value is ready for the app Deployment.
+  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+  TRACING_SAMPLING_PROBABILITY: "1.0"
+  # Enable Kubernetes-style Actuator liveness/readiness groups (no application.yml change).
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"

@@ -1,0 +1,45 @@
+# VCS / IDE
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings
+
+# Build outputs (rebuilt inside the image)
+target
+**/target
+build
+out
+
+# Local env / secrets
+.env
+.env.*
+*.local
+*.log
+
+# Docs and non-runtime assets
+docs
+README.md
+LICENSE
+
+# Frontend (separate app; not part of the Spring Boot JAR)
+frontend
+node_modules
+
+# Load / performance tooling (not needed to compile the server)
+loadtest
+perf
+
+# CI
+.github
+
+# Misc
+**/.DS_Store
+**/Thumbs.db
+*.zip

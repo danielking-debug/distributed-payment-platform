@@ -1,0 +1,35 @@
+# Build outputs
+target/
+*.class
+*.jar
+*.war
+*.ear
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Environment / secrets (keep examples)
+.env
+.env.*
+!.env.example
+
+# Node / frontend
+node_modules/
+
+# Loadtest artifacts
+loadtest/results/*
+!loadtest/results/.gitkeep
+loadtest/accounts.json
+
+# Misc
+HELP.md
