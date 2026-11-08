@@ -130,26 +130,6 @@ debit/credit happens asynchronously; this benchmark measures the
 synchronous half of the pipeline, which is also the half that matters for a
 caller's perceived latency.
 
-## Design decisions worth knowing for an interview
-
-- **Why an outbox instead of publishing to Kafka directly in the request?**
-  Publishing directly makes the DB commit and the Kafka publish two separate
-  non-atomic operations. If the process crashes between them, the payment
-  is stuck with no event ever published. The outbox row is written in the
-  same transaction as the payment, so publishing becomes "is there an
-  unpublished row?" — a question a background process can always eventually
-  answer correctly, even after a crash.
-- **Why pessimistic locking (`SELECT ... FOR UPDATE`) instead of optimistic
-  locking (`@Version`)?** Under load, many payments contend for the same
-  popular accounts. Optimistic locking would mean most of those retry after
-  a version conflict, wasting the work already done; pessimistic locking
-  with consistent lock ordering serializes access safely without retries or
-  deadlocks.
-- **Why key Kafka messages by account id?** Kafka only orders messages
-  within a partition. Keying by the source account guarantees that one
-  account's payments are processed in submission order, without requiring a
-  single partition (and therefore a single-threaded bottleneck) for the
-  whole system.
 
 ## Project structure
 
